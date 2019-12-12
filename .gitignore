@@ -1,0 +1,18 @@
+# Created by .ignore support plugin (hsz.mobi)
+*.class
+
+*.jar
+*.war
+*.ear
+
+*/target/*
+.settings
+.classpath
+.project
+.metadata
+.DS_Store
+
+*.iml
+*.idea
+refund-*/.gitignore
+*.log
