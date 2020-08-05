@@ -1,5 +1,8 @@
 package com.arithmetic.swordo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @version v1.0
  * @ProjectName: arithmetic
@@ -11,12 +14,9 @@ package com.arithmetic.swordo;
 public class FindRepeatNumber {
 
     public int findRepeatNumber(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == nums[nums[i]] && i != nums[i]) {
-                return nums[i];
-            } else {
-                swap(i, nums[i], nums);
-            }
+        Set<Integer> dic = new HashSet<>(nums.length);
+        for (int num : nums) {
+            if (!dic.add(num)) return num;
         }
         return -1;
     }
