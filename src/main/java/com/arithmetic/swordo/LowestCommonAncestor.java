@@ -1,7 +1,7 @@
 package com.arithmetic.swordo;
 
 /**
- * 68 - I. 二叉搜索树的最近公共祖先
+ * 68 - II. 二叉树的最近公共祖先
  */
 public class LowestCommonAncestor {
 
