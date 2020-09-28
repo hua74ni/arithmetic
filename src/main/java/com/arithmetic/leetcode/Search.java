@@ -15,47 +15,22 @@ public class Search {
         int right = nums.length - 1;
         int middle;
         while (right >= left) {
-            middle = (left + right) / 2;
+            middle = (left + right) >> 1;
             if (nums[middle] == target) {
                 return middle;
-            }
-            if (nums[left] <= nums[right]) {
-                break;
             }
             if (nums[left] <= nums[middle]) {
-                left = middle + 1;
+                if (nums[left] <= target && target <= nums[middle]) {
+                    right = middle - 1;
+                } else {
+                    left = middle + 1;
+                }
             } else {
-                right = middle;
-            }
-        }
-        int lastStart = left;
-        // [fromIndex, toIndex) 因此不减一
-        int lastEnd = nums.length;
-        int preStart = 0;
-        // [fromIndex, toIndex) 因此不减一
-        int preEnd = lastStart;
-        int res = -1;
-        if ((res = binarySearch(nums, preStart, preEnd, target)) >= 0) {
-            return res;
-        }
-        if ((res = binarySearch(nums, lastStart, lastEnd, target)) >= 0) {
-            return res;
-        }
-        return -1;
-    }
-
-    private int binarySearch(int[] nums, int start, int end, int target) {
-        int middle;
-        end = end - 1;
-        while (end >= start) {
-            middle = (start + end) / 2;
-            if (nums[middle] == target) {
-                return middle;
-            }
-            if (nums[middle] > target) {
-                end = middle - 1;
-            } else {
-                start = middle + 1;
+                if (nums[middle] <= target && target <= nums[right]) {
+                    left = middle + 1;
+                } else {
+                    right = middle - 1;
+                }
             }
         }
         return -1;
@@ -63,8 +38,7 @@ public class Search {
 
     public static void main(String[] args) {
         int[] nums = new int[]{0, 1, 2};
-        System.out.println(new Search().search(nums, 0));
-
+        System.out.println(new Search().search(nums, 1));
     }
 
 }
