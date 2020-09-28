@@ -1,32 +1,31 @@
-package com.arithmetic.leetcode;
+package com.arithmetic.sort;
 
 import com.alibaba.fastjson.JSON;
 
 /**
  * @version v1.0
  * @ProjectName: arithmetic
- * @ClassName: SmallestK
- * @Description: 面试题 17.14. 最小K个数
+ * @ClassName: NewHeapSort
+ * @Description: 堆排序
  * @Author: huangdh
- * @Date: 2020/9/28 下午1:51
+ * @Date: 2020/9/28 下午2:23
  */
-public class SmallestK {
+public class NewHeapSort {
 
-    public int[] smallestK(int[] arr, int k) {
-        int length = arr.length;
-        buildMin(arr, length);
+    /**
+     * 该节点的左右节点
+     * 左节点:(i + 1) * 2 - 1  右节点:(i + 1) * 2
+     * 该节点的父节点: (i - 1) / 2
+     */
+    private void heapSort(int[] nums) {
+        int length = nums.length;
+        buildMin(nums, length);
         length--;
-        for (int i = k; i > 0; i--) {
-            swap(arr, 0, length);
+        for (int i = length - 1; i > 0; i--) {
+            swap(nums, 0, length);
             length--;
-            minHeapify(arr, length, 0);
+            minHeapify(nums, length, 0);
         }
-        int[] res = new int[k];
-        length = arr.length - 1;
-        for (int i = 0; i < k; i++) {
-            res[i] = arr[length--];
-        }
-        return res;
     }
 
     private void buildMin(int[] nums, int length) {
@@ -59,8 +58,9 @@ public class SmallestK {
     }
 
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 3, 5, 7, 2, 4, 6, 8};
-        System.out.println(JSON.toJSONString(new SmallestK().smallestK(nums, 4)));
+        int[] nums = new int[]{4, 5, 11, 2, -1};
+        new NewHeapSort().heapSort(nums);
+        System.out.println(JSON.toJSONString(nums));
     }
 
 }
