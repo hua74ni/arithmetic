@@ -30,7 +30,7 @@ public class FindMin {
                 left = middle + 1;
             } else {
                 /**
-                 * 说明 [left, middle] 非是递增，最小值在前部分，由于 无法判断 middle 是否是最小值，因此不减一
+                 * 说明 [middle, right] 是递增，最小值在前面部分,注意 此时的 middle可能是最小值
                  */
                 right = middle;
             }
@@ -39,7 +39,7 @@ public class FindMin {
     }
 
     public static void main(String[] args) {
-        int[] nums = new int[]{2, 1};
+        int[] nums = new int[]{4, 1, 2, 3};
         System.out.println(new FindMin().findMin(nums));
     }
 
