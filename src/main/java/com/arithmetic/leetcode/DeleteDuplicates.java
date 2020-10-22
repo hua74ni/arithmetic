@@ -1,5 +1,7 @@
 package com.arithmetic.leetcode;
 
+import java.util.HashSet;
+
 public class DeleteDuplicates {
 
     public static class ListNode {
@@ -12,49 +14,24 @@ public class DeleteDuplicates {
     }
 
     public ListNode deleteDuplicates(ListNode head) {
-
         if (head == null) {
             return null;
         }
-
-        // 找到第一个不重复的root
-        ListNode root = head;
-        for (; root != null; ) {
-            ListNode next = root.next;
-            if (next != null && next.val == root.val) {
-                for (; next != null && next.val == root.val; ) {
-                    next = next.next;
-                }
-                root = next;
-                head = next;
-            } else {
-                break;
-            }
-        }
-
-        if (head == null) {
-            return root;
-        }
-
+        HashSet<Integer> set = new HashSet();
+        ListNode res = head;
         ListNode pre = head;
+        set.add(head.val);
         head = head.next;
-        for (; head != null; ) {
-            ListNode current = head;
-            ListNode next = current.next;
-            if (next != null && next.val == current.val) {
-                // 找到所有相同的
-                for (; next != null && next.val == current.val; ) {
-                    next = next.next;
-                }
-                pre.next = next;
-                head = next;
-            } else {
-                pre = current;
-                head = current.next;
+        while (head != null) {
+            if (!set.contains(head.val)) {
+                pre.next = head;
+                pre = head;
+                set.add(head.val);
             }
+            head = head.next;
         }
-
-        return root;
+        pre.next = null;
+        return res;
     }
 
     public static void main(String[] args) {

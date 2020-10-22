@@ -1,5 +1,6 @@
 package com.arithmetic.leetcode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -42,6 +43,9 @@ public class HasCycle {
         head1.next = head;
 
         System.out.println(new HasCycle().detectCycle(head).val);
+
+        ArrayList<Integer> list = new ArrayList<>();
+
     }
 
 }

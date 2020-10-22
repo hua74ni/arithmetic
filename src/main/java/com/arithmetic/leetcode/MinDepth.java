@@ -1,5 +1,8 @@
 package com.arithmetic.leetcode;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 /**
  * @version v1.0
  * @ProjectName: sfm
@@ -21,17 +24,37 @@ public class MinDepth {
     }
 
     public int minDepth(TreeNode root) {
-        if (root == null) {
-            return 0;
+        if (root == null) return 0;
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+        int length = 1;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode currentNode = queue.poll();
+                if (currentNode.left == null && currentNode.right == null) {
+                    return length;
+                }
+                if (currentNode.left != null) queue.add(currentNode.left);
+                if (currentNode.right != null) queue.add(currentNode.right);
+            }
+            length++;
         }
-        if (root.left != null && root.right == null) {
-            return minDepth(root.left) + 1;
-        } else if (root.left == null && root.right != null) {
-            return minDepth(root.right) + 1;
-        } else {
-            return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
-        }
+        return -1;
     }
+
+//    public int minDepth(TreeNode root) {
+//        if (root == null) {
+//            return 0;
+//        }
+//        if (root.left != null && root.right == null) {
+//            return minDepth(root.left) + 1;
+//        } else if (root.left == null && root.right != null) {
+//            return minDepth(root.right) + 1;
+//        } else {
+//            return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
+//        }
+//    }
 
     public static void main(String[] args) {
 
