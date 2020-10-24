@@ -1,14 +1,14 @@
-package com.arithmetic.swordo;
+package com.arithmetic.leetcode;
 
 /**
  * @version v1.0
  * @ProjectName: arithmetic
- * @ClassName: MaxProfit
- * @Description: 63. 股票的最大利润
+ * @ClassName: maxProfitII
+ * @Description: 122. 买卖股票的最佳时机 II
  * @Author: huangdh
- * @Date: 2020/8/31 上午9:40
+ * @Date: 2020/10/24 下午4:55
  */
-public class MaxProfit {
+public class MaxProfitII {
 
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length == 0) return 0;
@@ -19,14 +19,18 @@ public class MaxProfit {
                 min = prices[i];
                 continue;
             }
-            res = Math.max(res, prices[i] - min);
+            while (i + 1 < prices.length && prices[i + 1] > prices[i]) {
+                i++;
+            }
+            res += prices[i] - min;
+            min = prices[i];
         }
         return res;
     }
 
     public static void main(String[] args) {
         int[] prices = new int[]{7, 1, 5, 3, 6, 4};
-        System.out.println(new MaxProfit().maxProfit(prices));
+        System.out.println(new MaxProfitII().maxProfit(prices));
     }
 
 }
